@@ -11,7 +11,7 @@ const second = ref(-1)
 const sorting = ref(false)
 
 function init() {
-  nowI.value = -1
+  nowI.value = 0
   nowJ.value = -1
   active.value = -1
   second.value = -1
@@ -39,6 +39,7 @@ async function bubbleSort() {
       active.value = sortableList[j]
       second.value = sortableList[j + 1]
       if (sortableList[j] > sortableList[j + 1]) {
+        await waitForTimeout(1000)
         swap(j, j + 1, sortableList)
       }
       await waitForTimeout(1000)

@@ -8,4 +8,9 @@ export default defineNuxtConfig({
     '@element-plus/nuxt',
     '@vueuse/nuxt'],
   css: ['@/assets/styles/index.less', "github-markdown-css/github-markdown.css"],
+  content: {
+    highlight: {
+      theme: 'github-light'
+    }
+  }
 })
