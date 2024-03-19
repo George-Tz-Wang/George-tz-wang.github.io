@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {useSortableList} from "~/composables/useSortableList";
 import _ from 'lodash'
-const { sortableList, shuffle } = useSortableList(20)
+const { sortableList, shuffle } = useSortableList(10)
 
 
-const nowI = ref(-1)
+const nowI = ref(0)
 const nowJ = ref(-1)
 const active = ref(-1)
 const second = ref(-1)
@@ -26,20 +26,22 @@ async function bubbleSort() {
      return
   }
   sorting.value = true
-  // 算法1，每次从0开始遍历，直到length-1-i，因为length-1-i到i已经是有序的数据
-  // 其实还可以反过来，i从length-1直到1
-  for (let i = 0; i < sortableList.length - 1; i++) {
+  // 每次从0开始遍历，直到length-1-i，因为length-1-i到i已经是有序的数据
+  for (let i = 1; i < sortableList.length; i++) {
     nowI.value = i
     let j = 0
-    for (; j < sortableList.length - 1 - i; j++) {
+    for (; j < sortableList.length - i; j++) {
       if (!sorting.value) { return }
-      await waitForTimeout(1000)
+      if (i > 0) {
+        await waitForTimeout(500)
+      }
       nowJ.value = j
       active.value = sortableList[j]
       second.value = sortableList[j + 1]
       if (sortableList[j] > sortableList[j + 1]) {
         swap(j, j + 1, sortableList)
       }
+      await waitForTimeout(1000)
     }
   }
   init()
@@ -59,30 +61,31 @@ function swap<T>(index1: number, index2: number, list: T[]) {
 </script>
 
 <template>
-  <div>
-    <ContentDoc path="/bubble-sort">
-    </ContentDoc>
+  <client-only>
     <div>
-      <button @click="bubbleSort()" :disabled="sorting">Start</button>
-      <button @click="stop" :disabled="!sorting">Stop</button>
-      <button @click="shuffleSort" :disabled="sorting">Shuffle</button>
+      <ContentDoc path="/bubble-sort" class="markdown-body" />
       <div>
-        <span>第{{ nowI + 1 }}轮</span>
+        <button @click="bubbleSort()" :disabled="sorting">Start</button>
+        <button @click="stop" :disabled="!sorting">Stop</button>
+        <button @click="shuffleSort" :disabled="sorting">Shuffle</button>
+        <div>
+          <span>第{{ nowI }}轮</span>
+        </div>
       </div>
-    </div>
-    <transition-group name="list" tag="div" class="flex items-end gap-x-1 sortable-contain">
+      <transition-group name="list" tag="div" class="flex items-end gap-x-1 sortable-contain">
       <span v-for="(item, index) in sortableList" :key="item"
             class="sortable-item"
             :class="{
-              sorted: index > sortableList.length - 1 - nowI,
+              sorted: index > sortableList.length - nowI,
               'now-index': active === item,
               active: active === item,
               'second-active': second === item,
             }"
             :style="{ '--height': item * 5 + 'px', '--value': item, '--index': index }"
       ></span>
-    </transition-group>
-  </div>
+      </transition-group>
+    </div>
+  </client-only>
 </template>
 
 <style scoped lang="less">

@@ -6,9 +6,8 @@ definePageMeta({
 </script>
 
 <template>
-  <nuxt-page></nuxt-page>
+  <div>
+    <RouteTabs route-name="Components" />
+    <nuxt-page></nuxt-page>
+  </div>
 </template>
-
-<style scoped>
-
-</style>

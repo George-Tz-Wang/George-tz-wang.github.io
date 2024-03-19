@@ -1,11 +1,5 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-<div>header</div>
+<div>
+  <RouteTabs />
+</div>
 </template>
-
-<style scoped>
-
-</style>

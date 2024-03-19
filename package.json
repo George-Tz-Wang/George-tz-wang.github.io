@@ -17,6 +17,7 @@
     "@types/lodash": "^4.17.0",
     "@vueuse/nuxt": "^10.9.0",
     "axios": "^1.6.8",
+    "github-markdown-css": "^5.5.1",
     "less": "^4.2.0",
     "lodash": "^4.17.21",
     "novel": "^0.2.12",
