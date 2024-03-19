@@ -4,14 +4,32 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host --no-qr -p 9990",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@tiptap/pm": "^2.2.4",
+    "@tiptap/starter-kit": "^2.2.4",
+    "@tiptap/vue-2": "^2.2.4",
+    "@tiptap/vue-3": "^2.2.4",
+    "@types/lodash": "^4.17.0",
+    "@vueuse/nuxt": "^10.9.0",
+    "axios": "^1.6.8",
+    "less": "^4.2.0",
+    "lodash": "^4.17.21",
+    "novel": "^0.2.12",
     "nuxt": "^3.10.3",
+    "radix-vue": "^1.5.2",
+    "vditor": "^3.10.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@element-plus/nuxt": "^1.0.7",
+    "@nuxt/content": "^2.12.1",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "element-plus": "^2.6.1"
   }
 }
